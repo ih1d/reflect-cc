@@ -1,0 +1,62 @@
+cabal-version:      3.0
+name:               reflect-cc
+version:            0.1.0.0
+synopsis:           Monadic Reflection as Effects
+homepage:           https://github.com/ih1d/reflect-cc
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Isaac Lopez
+maintainer:         isaac.lopez@upr.edu
+category:           Control
+build-type:         Simple
+extra-doc-files:    
+    README.md
+    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+                 -Wcompat
+                 -Widentities
+                 -Wincomplete-record-updates
+                 -Wincomplete-uni-patterns
+                 -Wmissing-home-modules
+                 -Wpartial-fields
+                 -Wredundant-constraints
+                 -Wunused-packages
+
+library
+    import:           warnings
+    exposed-modules:
+        Control.Delimited
+        Control.Monad.Reflection
+        Control.Monad.State
+        Control.Monad.Except
+
+    other-modules:
+        Control.Delimited.Internal
+        Control.Monad.Reflection.Internal
+    build-depends:    base >=4.18 && <4.22
+                    , transformers
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+test-suite reflect-cc-test
+    import:           warnings
+    default-language: GHC2021
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        base >=4.18 && <4.22,
+        reflect-cc
+
+benchmark reflect-cc-bench
+    import:           warnings
+    default-language: GHC2021
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   benchmark
+    main-is:          Main.hs
+    build-depends:
+        base >=4.18 && <4.22,
+        reflect-cc
+
