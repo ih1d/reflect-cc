@@ -38,11 +38,10 @@ reify emb act = Eff $ do
     reset t (unEff (act (Handle t emb)) >>= \a -> pure (pure a))
 
 reflect :: (Monad (T e Eff)) => Handle e b -> T e Eff a -> Eff a
-reflect (Handle t embed) m = Eff (shift t $ \k -> pure (m >>= \a -> embed (k a)))
+reflect (Handle t embed) m = Eff (shift t $ \k -> pure (m >>= embed . k))
 
 io2eff :: IO a -> Eff a
 io2eff = Eff
 
 runEff :: Eff a -> IO a
 runEff (Eff m) = m
-
