@@ -32,9 +32,10 @@ library
         Control.Monad.State
         Control.Monad.Except
         Control.Monad.Reader
+        Control.Monad.NonDet
+        Control.Monad.Coroutine
     other-modules:
         Control.Delimited.Internal
-        Control.Monad.Reflection.Internal
     build-depends:    base >=4.18 && <4.22
                     , transformers
     hs-source-dirs:   src

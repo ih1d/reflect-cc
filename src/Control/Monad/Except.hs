@@ -3,7 +3,6 @@
 module Control.Monad.Except where
 
 import Control.Monad.Reflection
-import Control.Monad.Reflection.Internal
 import Control.Monad.Trans.Except (ExceptT (ExceptT), runExceptT)
 import Data.Kind (Type)
 

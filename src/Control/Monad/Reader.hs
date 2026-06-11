@@ -3,7 +3,6 @@
 module Control.Monad.Reader where
 
 import Control.Monad.Reflection
-import Control.Monad.Reflection.Internal
 import Control.Monad.Trans.Reader (ReaderT (ReaderT, runReaderT))
 import Data.Kind (Type)
 
