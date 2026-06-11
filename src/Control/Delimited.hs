@@ -1,12 +1,12 @@
 {-# LANGUAGE TypeFamilies #-}
 
-module Control.Delimited (
-    reset,
-    shift0,
-    control,
-    shift,
-    newTag,
-) where
+module Control.Delimited
+    ( reset,
+      shift0,
+      control,
+      shift,
+      newTag,
+    ) where
 
 import Control.Delimited.Internal
 

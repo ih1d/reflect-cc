@@ -1,9 +1,10 @@
 {-# LANGUAGE TypeFamilies #-}
+
 module Control.Monad.State where
 
-import Control.Monad.Reflection.Internal
 import Control.Monad.Reflection
-import Control.Monad.Trans.State (StateT(StateT, runStateT))
+import Control.Monad.Reflection.Internal
+import Control.Monad.Trans.State (StateT (StateT, runStateT))
 import Data.Kind (Type)
 
 data State (s :: Type)

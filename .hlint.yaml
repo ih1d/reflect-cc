@@ -1,0 +1,22 @@
+# HLint configuration for reflect-cc.
+# Reference: https://github.com/ndmitchell/hlint#readme
+# Apply with: ./scripts/format.sh   (or: hlint src test benchmark)
+#
+# The code base currently lints clean ("No hints"); the directives below keep
+# it that way as the library grows, without fighting its low-level CPS style.
+
+# Promote a couple of high-value suggestions to warnings.
+- warn: {name: Use lambda-case}
+- warn: {name: Use fmap}
+
+# This library is built on raw delimited-continuation primitives and CPS
+# combinators, where point-ful lambdas and explicit wrapping are intentional.
+- ignore: {name: Eta reduce}
+- ignore: {name: Avoid lambda}
+- ignore: {name: Redundant lambda}
+
+# `Reflection.Internal` wraps GHC primops; let it use `$`/`pure` as written.
+- ignore: {name: Redundant $, within: [Control.Delimited, Control.Delimited.Internal]}
+
+# Restriction hints (off by default) — keep disabled for this low-level package.
+- group: {name: generalise, enabled: false}

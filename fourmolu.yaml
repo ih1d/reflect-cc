@@ -1,0 +1,65 @@
+# Fourmolu configuration for reflect-cc.
+# Reference: https://fourmolu.github.io/config/  (run `fourmolu --print-defaults`)
+# Apply with: ./scripts/format.sh   (or: fourmolu --mode inplace <files>)
+
+# Number of spaces per indentation step.
+indentation: 4
+
+# Max line length for automatic line breaking. Set to `none` to preserve
+# hand-wrapped signatures verbatim.
+column-limit: 100
+
+# Arrows in type signatures: keep `=>` / `->` at the start of continuation
+# lines, matching the existing multi-line signatures (e.g. `reify`).
+function-arrows: leading
+
+# Trailing commas in lists/records, matching the existing export lists.
+comma-style: trailing
+
+# Lay out import/export lists with the opening paren and trailing commas.
+import-export-style: trailing
+
+# Preserve the existing single import group (no blank-line regrouping).
+import-grouping: legacy
+
+# Half-indent `where` bindings rather than full-indent.
+indent-wheres: false
+
+# No space before an opening record brace: `Foo{..}`.
+record-brace-space: false
+
+# One blank line between top-level declarations.
+newlines-between-decls: 1
+
+# Collapse Haddock comments onto a single line where possible.
+haddock-style: single-line
+haddock-style-module: single-line
+
+# Let fourmolu choose inline vs. newline `let` layout.
+let-style: auto
+
+# Align `in` under the body of the `let`.
+in-style: right-align
+
+# Always parenthesise a single constraint / single deriving class.
+single-constraint-parens: always
+single-deriving-parens: always
+
+# Leave constraint / deriving ordering as written.
+sort-constraints: false
+sort-derived-classes: false
+sort-deriving-clauses: false
+
+# Place infixr-0 section operators (e.g. `$`) in trailing position.
+trailing-section-operators: true
+
+# Use ASCII syntax, never Unicode operators.
+unicode: never
+
+# Honour the programmer's blank lines within declarations.
+respectful: true
+
+# Operator fixities, known re-exports, and local modules: none needed yet.
+fixities: []
+reexports: []
+local-modules: []

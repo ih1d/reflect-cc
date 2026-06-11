@@ -31,7 +31,7 @@ library
         Control.Monad.Reflection
         Control.Monad.State
         Control.Monad.Except
-
+        Control.Monad.Reader
     other-modules:
         Control.Delimited.Internal
         Control.Monad.Reflection.Internal

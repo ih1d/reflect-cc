@@ -1,10 +1,11 @@
 {-# LANGUAGE TypeFamilies #-}
+
 module Control.Monad.Except where
 
-import Control.Monad.Reflection.Internal
 import Control.Monad.Reflection
-import Data.Kind (Type)
+import Control.Monad.Reflection.Internal
 import Control.Monad.Trans.Except (ExceptT (ExceptT), runExceptT)
+import Data.Kind (Type)
 
 data Except (s :: Type)
 
