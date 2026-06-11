@@ -29,15 +29,17 @@ library
     exposed-modules:
         Control.Delimited
         Control.Monad.Reflection
-        Control.Monad.State
-        Control.Monad.Except
-        Control.Monad.Reader
-        Control.Monad.NonDet
-        Control.Monad.Coroutine
+        Control.Monad.Reflection.State
+        Control.Monad.Reflection.Except
+        Control.Monad.Reflection.Reader
+        Control.Monad.Reflection.NonDet
+        Control.Monad.Reflection.Coroutine
     other-modules:
         Control.Delimited.Internal
     build-depends:    base >=4.18 && <4.22
                     , transformers
+                    , list-t
+                    , monad-coroutine
     hs-source-dirs:   src
     default-language: GHC2021
 

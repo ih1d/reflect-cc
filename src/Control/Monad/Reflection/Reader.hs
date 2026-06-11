@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies #-}
 
-module Control.Monad.Reader where
+module Control.Monad.Reflection.Reader where
 
 import Control.Monad.Reflection
 import Control.Monad.Trans.Reader (ReaderT (ReaderT, runReaderT))

@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeFamilies #-}
 
-module Control.Monad.State where
+module Control.Monad.Reflection.State where
 
 import Control.Monad.Reflection
 import Control.Monad.Trans.State (StateT (StateT, runStateT))
