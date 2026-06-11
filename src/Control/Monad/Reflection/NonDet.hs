@@ -1,11 +1,12 @@
 {-# LANGUAGE TypeFamilies #-}
+
 module Control.Monad.Reflection.NonDet where
 
-import ListT
-import Control.Monad.Reflection
-import Control.Applicative (Alternative(empty))
+import Control.Applicative (Alternative (empty))
 import Control.Monad (join)
+import Control.Monad.Reflection
 import Control.Monad.Trans.Class
+import ListT
 
 data NonDet
 
