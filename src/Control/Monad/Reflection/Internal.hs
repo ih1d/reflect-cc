@@ -1,7 +1,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE DerivingVia #-}
 
-module Control.Monad.Reflection (module Control.Monad.Reflection) where
+module Control.Monad.Reflection.Internal where
 
 import Control.Delimited
 import Control.Delimited.Internal (PromptTag)

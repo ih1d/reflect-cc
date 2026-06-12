@@ -36,6 +36,7 @@ library
         Control.Monad.Reflection.Coroutine
     other-modules:
         Control.Delimited.Internal
+        Control.Monad.Reflection.Internal
     build-depends:    base >=4.18 && <4.22
                     , transformers
                     , list-t
@@ -63,3 +64,12 @@ benchmark reflect-cc-bench
         base >=4.18 && <4.22,
         reflect-cc
 
+executable ml-example
+    import:           warnings
+    default-language: GHC2021
+    hs-source-dirs:   ml-example
+    main-is:          Main.hs
+    build-depends:
+        base >=4.18 && <4.22,
+        transformers,
+        reflect-cc
