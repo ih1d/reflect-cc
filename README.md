@@ -7,7 +7,7 @@ Monadic Reflection as effects.
 ```hs
 prog :: Handle (Except String) s -> Handle (State s) s -> Handle (Reader env) r -> Eff s
 prog he hs hr = do
-    env <- ask
+    env <- ask hr
     if null env
         then throw he "empty env!"
         else do
