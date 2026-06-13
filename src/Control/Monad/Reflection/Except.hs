@@ -8,10 +8,12 @@ import Data.Kind (Type)
 
 data Except (s :: Type)
 
-type instance T (Except e) m = ExceptT e m
+type instance T (Except e) Eff = ExceptT e Eff
 
-throw :: Handle (Except e) r -> e -> Eff a
+throw :: SomeHandle (Except e) -> e -> Eff a
 throw h err = reflect h (ExceptT (pure (Left err)))
 
-runExcept :: (Handle (Except e) a -> Eff a) -> Eff (Either e a)
-runExcept body = reify (\io -> ExceptT (io2eff io >>= \r -> runExceptT r)) body >>= runExceptT
+runExcept :: Scope (Except e) a -> Eff (Either e a)
+runExcept scope = reify exceptEmbed scope >>= runExceptT
+    where
+        exceptEmbed = Embed (\io -> ExceptT (doIO io >>= \r -> runExceptT r))

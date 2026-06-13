@@ -1,7 +1,8 @@
 {-# LANGUAGE TypeFamilies #-}
 
 module Control.Delimited
-    ( reset,
+    ( PromptTag,
+      reset,
       shift0,
       control,
       shift,

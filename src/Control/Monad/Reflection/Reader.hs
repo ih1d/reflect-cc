@@ -8,11 +8,13 @@ import Data.Kind (Type)
 
 data Reader (r :: Type)
 
-type instance T (Reader r) m = ReaderT r m
+type instance T (Reader r) Eff = ReaderT r Eff
 
-ask :: Handle (Reader r) a -> Eff r
-ask h = reflect h (ReaderT $ \r -> pure r)
+ask :: SomeHandle (Reader r) -> Eff r
+ask h = reflect h (ReaderT pure)
 
-runReader :: r -> (Handle (Reader r) a -> Eff a) -> Eff a
-runReader r body =
-    reify (\io -> ReaderT $ \r' -> io2eff io >>= \t -> runReaderT t r') body >>= \res -> runReaderT res r
+runReader :: r -> Scope (Reader r) r -> Eff r
+runReader r scope = 
+    reify readerEmbed scope >>= \res -> runReaderT res r
+    where
+        readerEmbed = Embed (\io -> ReaderT (\r' -> doIO io >>= \t -> runReaderT t r'))

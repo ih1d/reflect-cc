@@ -8,13 +8,15 @@ import Data.Kind (Type)
 
 data State (s :: Type)
 
-type instance T (State s) m = StateT s m
+type instance T (State s) Eff = StateT s Eff
 
-get :: Handle (State s) r -> Eff s
+get :: SomeHandle (State s) -> Eff s
 get h = reflect h (StateT $ \s -> pure (s, s))
 
-put :: Handle (State s) r -> s -> Eff ()
+put :: SomeHandle (State s) -> s -> Eff ()
 put h s = reflect h (StateT $ \_ -> pure ((), s))
 
-runState :: s -> (Handle (State s) a -> Eff a) -> Eff (a, s)
-runState s0 body = reify (\io -> StateT $ \s -> io2eff io >>= \t -> runStateT t s) body >>= \res -> runStateT res s0
+runState :: s -> Scope (State s) a -> Eff (a, s)
+runState s0 scope = reify stateEmbed scope >>= \res -> runStateT res s0
+    where
+        stateEmbed = Embed (\io -> StateT $ \s -> doIO io >>= \t -> runStateT t s)

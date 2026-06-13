@@ -32,8 +32,6 @@ library
         Control.Monad.Reflection.State
         Control.Monad.Reflection.Except
         Control.Monad.Reflection.Reader
-        Control.Monad.Reflection.NonDet
-        Control.Monad.Reflection.Coroutine
     other-modules:
         Control.Delimited.Internal
         Control.Monad.Reflection.Internal
@@ -62,14 +60,4 @@ benchmark reflect-cc-bench
     main-is:          Main.hs
     build-depends:
         base >=4.18 && <4.22,
-        reflect-cc
-
-executable ml-example
-    import:           warnings
-    default-language: GHC2021
-    hs-source-dirs:   ml-example
-    main-is:          Main.hs
-    build-depends:
-        base >=4.18 && <4.22,
-        transformers,
         reflect-cc

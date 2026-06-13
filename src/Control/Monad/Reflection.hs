@@ -1,39 +1,24 @@
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE DerivingVia #-}
+module Control.Monad.Reflection (
+    Eff,
+    Embed(..),
+    Handle,
+    Scope(..),
+    SomeHandle(..),
+    T,
+    reify,
+    reflect,
+    doIO,
+    runEff,
+) where
 
-module Control.Monad.Reflection (module Control.Monad.Reflection) where
+import Control.Monad.Reflection.Internal
 
-import Control.Delimited
-import Control.Delimited.Internal (PromptTag)
-import Data.Kind (Type)
+newtype Scope e a = Scope (forall r. (Handle e r -> Eff a))
 
--- Eff machinery
-type T :: Type -> (Type -> Type) -> Type -> Type
-type family T e m
+data SomeHandle e = forall r. SomeHandle (Handle e r)
 
-newtype Eff a = Eff {unEff :: IO a}
-    deriving (Functor, Applicative, Monad) via IO
-    
-data Handle e r = Handle
-    { tag :: PromptTag (T e Eff r),
-      embed :: forall a. IO (T e Eff a) -> T e Eff a
-    }
+reify :: (Monad (T e Eff)) => Embed e -> Scope e a -> Eff (T e Eff a)
+reify emb (Scope act) = eta emb act
 
-reify
-    :: forall e a
-     . (Monad (T e Eff))
-    => (forall r. IO (T e Eff r) -> T e Eff r)
-    -> (Handle e a -> Eff a)
-    -> Eff (T e Eff a)
-reify emb act = Eff $ do
-    t <- newTag
-    reset t (unEff (act (Handle t emb)) >>= \a -> pure (pure a))
-
-reflect :: (Monad (T e Eff)) => Handle e b -> T e Eff a -> Eff a
-reflect (Handle t embed) m = Eff (shift t $ \k -> pure (m >>= embed . k))
-
-io2eff :: IO a -> Eff a
-io2eff = Eff
-
-runEff :: Eff a -> IO a
-runEff (Eff m) = m
+reflect :: (Monad (T e Eff)) => SomeHandle e -> T e Eff a -> Eff a
+reflect (SomeHandle h) t = mu h t
