@@ -1,7 +1,6 @@
 module Control.Monad.Reflection (
     Eff,
     Embed(..),
-    Handle,
     Scope(..),
     SomeHandle(..),
     T,
