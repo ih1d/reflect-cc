@@ -15,5 +15,5 @@ throw h err = reflect h (ExceptT (pure (Left err)))
 
 runExcept :: Scope (Except e) a -> Eff (Either e a)
 runExcept scope = reify exceptEmbed scope >>= runExceptT
-    where
-        exceptEmbed = Embed (\io -> ExceptT (doIO io >>= \r -> runExceptT r))
+  where
+    exceptEmbed = Embed (\io -> ExceptT (doIO io >>= \r -> runExceptT r))

@@ -1,14 +1,14 @@
-module Control.Monad.Reflection (
-    Eff,
-    Embed(..),
-    Scope(..),
-    SomeHandle(..),
-    T,
-    reify,
-    reflect,
-    doIO,
-    runEff,
-) where
+module Control.Monad.Reflection
+    ( Eff (..),
+      Embed (..),
+      Scope (..),
+      SomeHandle (..),
+      T,
+      reify,
+      reflect,
+      doIO,
+      runEff,
+    ) where
 
 import Control.Monad.Reflection.Internal
 

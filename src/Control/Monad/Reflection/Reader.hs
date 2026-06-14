@@ -14,7 +14,7 @@ ask :: SomeHandle (Reader r) -> Eff r
 ask h = reflect h (ReaderT pure)
 
 runReader :: r -> Scope (Reader r) r -> Eff r
-runReader r scope = 
+runReader r scope =
     reify readerEmbed scope >>= \res -> runReaderT res r
-    where
-        readerEmbed = Embed (\io -> ReaderT (\r' -> doIO io >>= \t -> runReaderT t r'))
+  where
+    readerEmbed = Embed (\io -> ReaderT (\r' -> doIO io >>= \t -> runReaderT t r'))

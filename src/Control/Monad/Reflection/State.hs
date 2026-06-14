@@ -18,5 +18,5 @@ put h s = reflect h (StateT $ \_ -> pure ((), s))
 
 runState :: s -> Scope (State s) a -> Eff (a, s)
 runState s0 scope = reify stateEmbed scope >>= \res -> runStateT res s0
-    where
-        stateEmbed = Embed (\io -> StateT $ \s -> doIO io >>= \t -> runStateT t s)
+  where
+    stateEmbed = Embed (\io -> StateT $ \s -> doIO io >>= \t -> runStateT t s)

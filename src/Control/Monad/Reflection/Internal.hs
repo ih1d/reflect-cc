@@ -1,5 +1,5 @@
-{-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Control.Monad.Reflection.Internal where
 
@@ -13,7 +13,6 @@ type family T e m
 -- | Eff monad (thin wrapper over IO)
 newtype Eff a = Eff {unEff :: IO a}
     deriving (Functor, Applicative, Monad) via IO
-
 
 newtype Embed e = Embed (forall a. IO (T e Eff a) -> T e Eff a)
 
